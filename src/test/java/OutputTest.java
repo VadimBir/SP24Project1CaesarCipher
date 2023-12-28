@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 
-public class TestOutput {
+public class OutputTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
