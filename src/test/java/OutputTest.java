@@ -36,6 +36,22 @@ public class OutputTest {
         Assertions.assertTrue(true, "Output: " + output);
     }
     @Test
+    public void testAnyCiphertextOutput() {
+        // Set the inputs (12-character string and a fixed seed value)
+        String input = "HELLOWORLD!!\n7\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        // Call the main method
+        CaesarCipherDriver.main(null);
+
+        // Extract the output
+        String output = outputStreamCaptor.toString();
+
+        // Check if the output contains the expected ciphertext
+        Assertions.assertTrue(output.contains("Ciphertext: "), "Expected: Ciphertext: \nActual: " + output);
+    }
+    @Test
     public void testBaseCiphertextOutput() {
         // Set the inputs (12-character string and a fixed seed value)
         String input = "HELLOWORLD!!\n7\n";
@@ -49,11 +65,11 @@ public class OutputTest {
         String output = outputStreamCaptor.toString();
 
         // Check if the output contains the expected ciphertext
-        Assertions.assertTrue(output.contains("Ciphertext: "));
+        Assertions.assertTrue(output.contains("Ciphertext: "), "Expected: Ciphertext: \nActual: " + output);
         String[] parts = output.split("Ciphertext: ");
         if (parts.length > 1) {
             String cipherText = parts[1].split("\n")[0].trim();
-            Assertions.assertEquals("XQOVWWGEXZKO", cipherText);
+            Assertions.assertEquals("XQOVWWGEXZKO", cipherText, "Expected: XQOVWWGEXZKO\nActual: " + cipherText);
         } else {
             Assertions.fail("Ciphertext not found in output");
         }
@@ -61,7 +77,7 @@ public class OutputTest {
     @Test
     public void testFailCiphertextOutput() {
         // Set the inputs (12-character string and a fixed seed value)
-        String input = "HELLO";
+        String input = "HELLOME";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
