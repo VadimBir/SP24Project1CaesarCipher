@@ -86,7 +86,7 @@ public class OutputTest {
         // Extract the output
         String output = outputStreamCaptor.toString();
         String expected = "again!";
-        // Check if the output contains the expected ciphertext
+        // Check if the output contains the expected error
         Assertions.assertTrue(output.contains(expected), "Expected: " + expected + "\nActual: " + output);
     }
 
